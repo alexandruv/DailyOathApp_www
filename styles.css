@@ -669,7 +669,7 @@ h1 {
 
 .experience-field {
   position: relative;
-  min-height: 620px;
+  min-height: 700px;
   overflow: hidden;
   border-radius: 42px;
   background: var(--stone);
@@ -686,6 +686,7 @@ h1 {
   gap: 56px;
   width: calc(100% - 430px);
   margin: 86px 0 0 48px;
+  padding-bottom: 96px;
 }
 
 .feature-list article {

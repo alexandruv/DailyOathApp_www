@@ -99,6 +99,13 @@ test("closing download button stays compact instead of stretching", async () => 
   assert.match(css, /\.closing-cta\s*{[^}]*justify-self:\s*end/s);
 });
 
+test("ritual section keeps enough bottom padding around feature copy", async () => {
+  const css = await read("styles.css");
+
+  assert.match(css, /\.experience-field\s*{[^}]*min-height:\s*700px/s);
+  assert.match(css, /\.feature-list\s*{[^}]*padding-bottom:\s*96px/s);
+});
+
 test("cta buttons render a visible arrow icon inside the icon island", async () => {
   const html = await read("index.html");
   const css = await read("styles.css");
