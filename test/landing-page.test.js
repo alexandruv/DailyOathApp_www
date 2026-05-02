@@ -72,3 +72,14 @@ test("styles preserve the premium static landing page constraints", async () => 
   assert.doesNotMatch(css, /font-family:\s*Inter/);
   assert.doesNotMatch(css, /h-screen/);
 });
+
+test("cta buttons render a visible arrow icon inside the icon island", async () => {
+  const html = await read("index.html");
+  const css = await read("styles.css");
+
+  assert.match(html, /<span class="arrow-icon" aria-hidden="true"><\/span>/);
+  assert.match(css, /\.arrow-icon::before/);
+  assert.match(css, /\.arrow-icon::after/);
+  assert.doesNotMatch(css, /\.cta i::before/);
+  assert.doesNotMatch(css, /\.cta i::after/);
+});
