@@ -61,6 +61,13 @@ test("footer links to a privacy policy", async () => {
   await access(new URL("../privacy-policy.html", import.meta.url));
 });
 
+test("page links the bundled Daily Oath favicon", async () => {
+  const html = await read("index.html");
+
+  assert.match(html, /<link rel="icon" href="favicon.ico" sizes="any">/);
+  await access(new URL("../favicon.ico", import.meta.url));
+});
+
 test("styles preserve the premium static landing page constraints", async () => {
   const css = await read("styles.css");
 
@@ -71,6 +78,15 @@ test("styles preserve the premium static landing page constraints", async () => 
   assert.match(css, /height:\s*auto/);
   assert.doesNotMatch(css, /font-family:\s*Inter/);
   assert.doesNotMatch(css, /h-screen/);
+});
+
+test("closing download button stays compact instead of stretching", async () => {
+  const html = await read("index.html");
+  const css = await read("styles.css");
+
+  assert.match(html, /class="cta primary closing-cta"/);
+  assert.match(css, /\.closing-cta\s*{[^}]*width:\s*fit-content/s);
+  assert.match(css, /\.closing-cta\s*{[^}]*justify-self:\s*end/s);
 });
 
 test("cta buttons render a visible arrow icon inside the icon island", async () => {

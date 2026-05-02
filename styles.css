@@ -710,6 +710,12 @@ h1 {
   color: var(--vellum);
 }
 
+.closing-cta {
+  width: fit-content;
+  justify-self: end;
+  white-space: nowrap;
+}
+
 .site-footer {
   display: flex;
   justify-content: space-between;
@@ -829,6 +835,10 @@ h1 {
   .section-heading,
   .closing {
     grid-template-columns: 1fr;
+  }
+
+  .closing-cta {
+    justify-self: start;
   }
 
   .rank-gallery {
