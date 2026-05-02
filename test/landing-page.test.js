@@ -77,9 +77,9 @@ test("cta buttons render a visible arrow icon inside the icon island", async () 
   const html = await read("index.html");
   const css = await read("styles.css");
 
-  assert.match(html, /<span class="arrow-icon" aria-hidden="true"><\/span>/);
-  assert.match(css, /\.arrow-icon::before/);
-  assert.match(css, /\.arrow-icon::after/);
-  assert.doesNotMatch(css, /\.cta i::before/);
-  assert.doesNotMatch(css, /\.cta i::after/);
+  assert.match(html, /<svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"/);
+  assert.match(html, /<path d="M5 12h12m-5-5 5 5-5 5"/);
+  assert.match(css, /\.cta \.arrow-island/);
+  assert.doesNotMatch(css, /\.arrow-icon::before/);
+  assert.doesNotMatch(css, /\.arrow-icon::after/);
 });
