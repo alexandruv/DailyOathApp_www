@@ -25,6 +25,16 @@ test("landing page includes the core product sections from the Figma direction",
   assert.match(html, /Download Daily Oath/);
 });
 
+test("rank cards section teases the wider recovery arc", async () => {
+  const html = await read("index.html");
+  const css = await read("styles.css");
+
+  assert.match(html, /And many more\./);
+  assert.match(html, /Sixteen recovery archetypes mark the year/);
+  assert.match(html, /The next card is never just art/);
+  assert.match(css, /\.rank-tease/);
+});
+
 test("landing page exposes mobile app preview and recovery tarot card artwork", async () => {
   const html = await read("index.html");
 
