@@ -63,6 +63,15 @@ test("landing page uses the actual tarot card image assets from the mobile app",
   }
 });
 
+test("navigation embeds the Daily Oath logo asset", async () => {
+  const html = await read("index.html");
+  const css = await read("styles.css");
+
+  assert.match(html, /class="brand-logo" src="assets\/dailyOath-logo\.png"/);
+  assert.match(css, /\.brand-logo\s*{[^}]*width:\s*40px/s);
+  await access(new URL("../assets/dailyOath-logo.png", import.meta.url));
+});
+
 test("footer links to a privacy policy", async () => {
   const html = await read("index.html");
 
