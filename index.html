@@ -25,7 +25,8 @@
           <a href="#ritual">Ritual</a>
           <a href="#support">Urge Mode</a>
         </div>
-        <a class="nav-action" href="#download" aria-label="Download Daily Oath">
+        <a class="nav-action" href="#download" aria-label="Get notified when Daily Oath is available">
+          <span class="nav-action-label">Notify me</span>
           <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24">
             <path d="M5 12h12m-5-5 5 5-5 5"></path>
           </svg>
@@ -66,42 +67,16 @@
           </div>
 
           <div class="hero-art" aria-label="Recovery tarot rank cards">
-            <article class="tarot-card card-one" aria-label="The Tempered Will tarot card">
+            <div class="tarot-card card-one" aria-label="The Tempered Will tarot card">
               <img src="assets/ranks/tarot/tempered-will.png" alt="The Tempered Will tarot card">
               <h2>The Tempered Will</h2>
-            </article>
+            </div>
 
-            <article class="tarot-card card-two" aria-label="The Rooted Resolve tarot card">
+            <div class="tarot-card card-two" aria-label="The Rooted Resolve tarot card">
               <img src="assets/ranks/tarot/rooted-resolve.png" alt="The Rooted Resolve tarot card">
               <h2>The Rooted Resolve</h2>
-            </article>
-
-            <article class="tarot-card card-three" aria-label="The First Oath tarot card">
-              <img src="assets/ranks/tarot/first-oath.png" alt="The First Oath tarot card">
-              <h2>The First Oath</h2>
-            </article>
-          </div>
-
-          <aside class="phone-mock hero-phone" aria-label="Daily Oath mobile app preview">
-            <div class="phone-screen">
-              <div class="phone-topline">
-                <span>MAY 2</span>
-                <span>LEVEL 6</span>
-              </div>
-              <div class="phone-count">
-                <strong>60</strong>
-                <span>days sober</span>
-              </div>
-              <div class="rank-seal" aria-hidden="true"></div>
-              <h2>The Tempered<br>Will</h2>
-              <div class="progress-rail" aria-hidden="true"><span></span></div>
-              <div class="phone-card">
-                <small>TOTAL ASCENT</small>
-                <p>A mark for every day between here and the next rank.</p>
-              </div>
-              <button type="button">Check in</button>
             </div>
-          </aside>
+          </div>
         </div>
       </section>
 
@@ -144,26 +119,26 @@
           </p>
         </div>
         <div class="rank-gallery" aria-label="Daily Oath rank card gallery">
-          <article class="mini-card tilt-left">
+          <div class="mini-card tilt-left">
             <img src="assets/ranks/tarot/first-oath.png" alt="The First Oath tarot card">
             <b>The First Oath</b>
-          </article>
-          <article class="mini-card lift">
+          </div>
+          <div class="mini-card lift">
             <img src="assets/ranks/tarot/iron-oath.png" alt="The Iron Oath tarot card">
             <b>The Iron Oath</b>
-          </article>
-          <article class="mini-card tilt-right">
+          </div>
+          <div class="mini-card tilt-right">
             <img src="assets/ranks/tarot/tempered-will.png" alt="The Tempered Will tarot card">
             <b>The Tempered Will</b>
-          </article>
-          <article class="mini-card lift-low">
+          </div>
+          <div class="mini-card lift-low">
             <img src="assets/ranks/tarot/quiet-blade.png" alt="The Quiet Blade tarot card">
             <b>The Quiet Blade</b>
-          </article>
-          <article class="mini-card tilt-left">
+          </div>
+          <div class="mini-card tilt-left">
             <img src="assets/ranks/tarot/returned-king.png" alt="The Returned King tarot card">
             <b>The Returned King</b>
-          </article>
+          </div>
         </div>
         <div class="rank-tease">
           <p class="rank-tease-kicker">And many more.</p>
@@ -229,14 +204,24 @@
             a mark, a card, a next step.
           </p>
         </div>
-        <a class="cta primary closing-cta" href="mailto:hello@dailyoath.app?subject=Daily%20Oath%20early%20access">
-          <span>Download Daily Oath</span>
-          <span class="arrow-island" aria-hidden="true">
-            <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24">
-              <path d="M5 12h12m-5-5 5 5-5 5"></path>
-            </svg>
-          </span>
-        </a>
+        <form class="notify-form" action="/api/notify" method="post">
+          <label for="notify-email">Get notified when Daily Oath is available</label>
+          <div class="notify-row">
+            <input
+              id="notify-email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              placeholder="you@example.com"
+              required
+            >
+            <button type="submit">Notify me</button>
+          </div>
+          <p class="notify-note">One email when the app is ready to download. No spam.</p>
+          <p class="notify-success" role="status" aria-live="polite" hidden>
+            You are on the list. I will email you when Daily Oath is available.
+          </p>
+        </form>
       </section>
     </main>
 
