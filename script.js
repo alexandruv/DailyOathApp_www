@@ -37,6 +37,7 @@ if (notifyForm) {
 
     if (successMessage) {
       successMessage.hidden = true;
+      successMessage.classList.remove("is-error");
       successMessage.textContent = notifySuccessText;
     }
 
@@ -62,6 +63,7 @@ if (notifyForm) {
 
       if (successMessage) {
         successMessage.hidden = false;
+        successMessage.classList.remove("is-error");
         successMessage.textContent = notifySuccessText;
       }
 
@@ -69,6 +71,7 @@ if (notifyForm) {
     } catch {
       if (successMessage) {
         successMessage.hidden = false;
+        successMessage.classList.add("is-error");
         successMessage.textContent = notifyErrorText;
       }
     } finally {

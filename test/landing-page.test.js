@@ -192,6 +192,15 @@ test("notification form script restores the success message after a failed submi
   assert.match(script, /notifySuccessText/);
   assert.match(script, /notifyErrorText/);
   assert.match(script, /successMessage\.textContent = notifySuccessText/);
+  assert.match(script, /successMessage\.classList\.remove\("is-error"\)/);
   assert.match(script, /notifyForm\.classList\.remove\("is-submitted"\)/);
   assert.match(packageJson, /"start":\s*"node server\.js"/);
+});
+
+test("only the failed notification message uses bold italic styling", async () => {
+  const css = await read("styles.css");
+
+  assert.match(css, /\.notify-success\.is-error\s*{[^}]*font-style:\s*italic/s);
+  assert.match(css, /\.notify-success\.is-error\s*{[^}]*font-weight:\s*900/s);
+  assert.doesNotMatch(css, /\.notify-note,\s*\.notify-success\s*{[^}]*font-style:\s*italic/s);
 });
