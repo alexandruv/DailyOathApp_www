@@ -204,7 +204,11 @@
             a mark, a card, a next step.
           </p>
         </div>
-        <form class="notify-form" action="/api/notify" method="post">
+        <form
+          class="notify-form embeddable-buttondown-form"
+          action="https://buttondown.com/api/emails/embed-subscribe/alexandruv"
+          method="post"
+        >
           <label for="notify-email">Get notified when Daily Oath is available</label>
           <div class="notify-row">
             <input
@@ -215,12 +219,11 @@
               placeholder="you@example.com"
               required
             >
+            <input type="hidden" name="embed" value="1">
+            <input type="hidden" name="tag" value="daily-oath-launch">
             <button type="submit">Notify me</button>
           </div>
           <p class="notify-note">One email when the app is ready to download. No spam.</p>
-          <p class="notify-success" role="status" aria-live="polite" hidden>
-            You are on the list. I will email you when Daily Oath is available.
-          </p>
         </form>
       </section>
     </main>

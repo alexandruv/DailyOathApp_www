@@ -821,27 +821,12 @@ h1 {
   opacity: 0.72;
 }
 
-.notify-note,
-.notify-success {
+.notify-note {
   margin: 14px 22px 18px;
   color: var(--muted);
   font-size: 14px;
   font-weight: 750;
   line-height: 1.38;
-}
-
-.notify-success {
-  color: var(--moss);
-}
-
-.notify-success.is-error {
-  color: var(--muted);
-  font-style: italic;
-  font-weight: 900;
-}
-
-.notify-form.is-submitted .notify-note {
-  display: none;
 }
 
 .site-footer {

@@ -1,21 +1,8 @@
 import assert from "node:assert/strict";
-import { access, mkdtemp, readFile } from "node:fs/promises";
-import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { access, readFile } from "node:fs/promises";
 import { test } from "node:test";
-import { createAppServer } from "../server.js";
 
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
-
-const listen = (server) =>
-  new Promise((resolve) => {
-    server.listen(0, "127.0.0.1", () => {
-      const address = server.address();
-      resolve(`http://127.0.0.1:${address.port}`);
-    });
-  });
-
-const close = (server) => new Promise((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())));
 
 test("landing page renders the selected tarot progression narrative", async () => {
   const html = await read("index.html");
@@ -116,11 +103,12 @@ test("closing notification form captures download interest", async () => {
   const html = await read("index.html");
   const css = await read("styles.css");
 
-  assert.match(html, /class="notify-form"/);
-  assert.match(html, /action="\/api\/notify"/);
+  assert.match(html, /class="notify-form embeddable-buttondown-form"/);
+  assert.match(html, /action="https:\/\/buttondown\.com\/api\/emails\/embed-subscribe\/alexandruv"/);
+  assert.match(html, /name="embed" value="1"/);
+  assert.match(html, /name="tag" value="daily-oath-launch"/);
   assert.match(html, /type="email"/);
   assert.match(html, /Notify me/);
-  assert.match(html, /role="status"/);
   assert.match(css, /\.notify-form\s*{[^}]*width:\s*min\(100%, 470px\)/s);
   assert.match(css, /\.notify-form\s*{[^}]*justify-self:\s*end/s);
 });
@@ -143,64 +131,10 @@ test("cta buttons render a visible arrow icon inside the icon island", async () 
   assert.doesNotMatch(css, /\.arrow-icon::after/);
 });
 
-test("node server saves valid notification emails and protects the local jsonl list", async () => {
-  const notifyDataDir = await mkdtemp(join(tmpdir(), "daily-oath-www-"));
-  const server = createAppServer({ notifyDataDir });
-  const baseUrl = await listen(server);
-
-  try {
-    const validResponse = await fetch(`${baseUrl}/api/notify`, {
-      method: "POST",
-      body: new URLSearchParams({ email: " Person@Example.COM " }),
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-    });
-
-    assert.equal(validResponse.status, 200);
-
-    const saved = await readFile(join(notifyDataDir, "notify-list.jsonl"), "utf8");
-    const savedEntry = JSON.parse(saved.trim());
-
-    assert.equal(savedEntry.email, "person@example.com");
-    assert.match(savedEntry.createdAt, /^\d{4}-\d{2}-\d{2}T/);
-
-    const invalidResponse = await fetch(`${baseUrl}/api/notify`, {
-      method: "POST",
-      body: new URLSearchParams({ email: "not-an-email" }),
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-    });
-
-    assert.equal(invalidResponse.status, 400);
-
-    const leakedListResponse = await fetch(`${baseUrl}/.notify-data/notify-list.jsonl`);
-    assert.equal(leakedListResponse.status, 403);
-
-    const serverSourceResponse = await fetch(`${baseUrl}/server.js`);
-    assert.equal(serverSourceResponse.status, 404);
-  } finally {
-    await close(server);
-  }
-});
-
-test("notification form script restores the success message after a failed submit", async () => {
+test("notification form stays compatible with GitHub Pages static hosting", async () => {
   const script = await read("script.js");
   const packageJson = await read("package.json");
 
-  assert.match(script, /notifySuccessText/);
-  assert.match(script, /notifyErrorText/);
-  assert.match(script, /successMessage\.textContent = notifySuccessText/);
-  assert.match(script, /successMessage\.classList\.remove\("is-error"\)/);
-  assert.match(script, /notifyForm\.classList\.remove\("is-submitted"\)/);
-  assert.match(packageJson, /"start":\s*"node server\.js"/);
-});
-
-test("only the failed notification message uses bold italic styling", async () => {
-  const css = await read("styles.css");
-
-  assert.match(css, /\.notify-success\.is-error\s*{[^}]*font-style:\s*italic/s);
-  assert.match(css, /\.notify-success\.is-error\s*{[^}]*font-weight:\s*900/s);
-  assert.doesNotMatch(css, /\.notify-note,\s*\.notify-success\s*{[^}]*font-style:\s*italic/s);
+  assert.doesNotMatch(script, /fetch\(notifyForm\.action/);
+  assert.doesNotMatch(packageJson, /server\.js/);
 });
