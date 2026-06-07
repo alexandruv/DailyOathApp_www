@@ -25,8 +25,14 @@
           <a href="#ritual">Ritual</a>
           <a href="#support">Urge Mode</a>
         </div>
-        <a class="nav-action" href="#download" aria-label="Get notified when Daily Oath is available">
-          <span class="nav-action-label">Notify me</span>
+        <a
+          class="nav-action"
+          href="https://play.google.com/store/apps/details?id=com.dailyoath.daily_oath_app"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Download Daily Oath on Google Play"
+        >
+          <span class="nav-action-label">Get the app</span>
           <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24">
             <path d="M5 12h12m-5-5 5 5-5 5"></path>
           </svg>
@@ -204,27 +210,23 @@
             a mark, a card, a next step.
           </p>
         </div>
-        <form
-          class="notify-form embeddable-buttondown-form"
-          action="https://buttondown.com/api/emails/embed-subscribe/alexandruv"
-          method="post"
-        >
-          <label for="notify-email">Get notified when Daily Oath is available</label>
-          <div class="notify-row">
-            <input
-              id="notify-email"
-              name="email"
-              type="email"
-              autocomplete="email"
-              placeholder="you@example.com"
-              required
-            >
-            <input type="hidden" name="embed" value="1">
-            <input type="hidden" name="tag" value="daily-oath-launch">
-            <button type="submit">Notify me</button>
-          </div>
-          <p class="notify-note">One email when the app is ready to download. No spam.</p>
-        </form>
+        <div class="download-cta" aria-label="Download Daily Oath on Google Play">
+          <p class="download-cta-label">Download on Android</p>
+          <a
+            class="cta primary download-cta-button"
+            href="https://play.google.com/store/apps/details?id=com.dailyoath.daily_oath_app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>Get it on Google Play</span>
+            <span class="arrow-island" aria-hidden="true">
+              <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M5 12h12m-5-5 5 5-5 5"></path>
+              </svg>
+            </span>
+          </a>
+          <p class="download-cta-note">Free to download. Premium unlocks the full recovery journey.</p>
+        </div>
       </section>
     </main>
 

@@ -22,7 +22,8 @@ test("landing page includes the core product sections from the Figma direction",
   assert.match(html, /DAILY OATH/);
   assert.match(html, /URGE MODE/);
   assert.match(html, /RESETS/);
-  assert.match(html, /Get notified when Daily Oath is available/);
+  assert.match(html, /Download on Android/);
+  assert.match(html, /Get it on Google Play/);
 });
 
 test("rank cards section teases the wider recovery arc", async () => {
@@ -99,18 +100,22 @@ test("styles preserve the premium static landing page constraints", async () => 
   assert.doesNotMatch(css, /h-screen/);
 });
 
-test("closing notification form captures download interest", async () => {
+test("closing section links to the Google Play listing", async () => {
   const html = await read("index.html");
   const css = await read("styles.css");
+  const playStoreUrl =
+    "https://play.google.com/store/apps/details?id=com.dailyoath.daily_oath_app";
 
-  assert.match(html, /class="notify-form embeddable-buttondown-form"/);
-  assert.match(html, /action="https:\/\/buttondown\.com\/api\/emails\/embed-subscribe\/alexandruv"/);
-  assert.match(html, /name="embed" value="1"/);
-  assert.match(html, /name="tag" value="daily-oath-launch"/);
-  assert.match(html, /type="email"/);
-  assert.match(html, /Notify me/);
-  assert.match(css, /\.notify-form\s*{[^}]*width:\s*min\(100%, 470px\)/s);
-  assert.match(css, /\.notify-form\s*{[^}]*justify-self:\s*end/s);
+  assert.match(html, /class="download-cta"/);
+  assert.match(
+    html,
+    new RegExp(`href="${playStoreUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`)
+  );
+  assert.match(html, /target="_blank"/);
+  assert.match(html, /rel="noopener noreferrer"/);
+  assert.match(html, /Free to download\. Premium unlocks the full recovery journey\./);
+  assert.match(css, /\.download-cta\s*{[^}]*width:\s*min\(100%, 470px\)/s);
+  assert.match(css, /\.download-cta\s*{[^}]*justify-self:\s*end/s);
 });
 
 test("ritual section keeps enough bottom padding around feature copy", async () => {
@@ -131,10 +136,10 @@ test("cta buttons render a visible arrow icon inside the icon island", async () 
   assert.doesNotMatch(css, /\.arrow-icon::after/);
 });
 
-test("notification form stays compatible with GitHub Pages static hosting", async () => {
+test("landing page stays compatible with GitHub Pages static hosting", async () => {
   const script = await read("script.js");
   const packageJson = await read("package.json");
 
-  assert.doesNotMatch(script, /fetch\(notifyForm\.action/);
+  assert.doesNotMatch(script, /buttondown/);
   assert.doesNotMatch(packageJson, /server\.js/);
 });

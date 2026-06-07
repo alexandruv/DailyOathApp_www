@@ -748,81 +748,31 @@ h1 {
   color: var(--vellum);
 }
 
-.notify-form {
+.download-cta {
   width: min(100%, 470px);
   justify-self: end;
-  padding: 8px;
+  padding: 28px;
   border: 1px solid var(--line);
   border-radius: 30px;
   background: var(--vellum);
   box-shadow: 0 24px 70px rgba(72, 64, 55, 0.12);
 }
 
-.notify-form label {
-  display: block;
-  padding: 20px 22px 14px;
+.download-cta-label {
   color: var(--ink);
   font-size: 22px;
   font-weight: 900;
   line-height: 1.08;
 }
 
-.notify-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 8px;
-  border: 1px solid rgba(199, 183, 160, 0.9);
-  border-radius: 999px;
-  background: var(--paper);
+.download-cta-button {
+  width: 100%;
+  margin-top: 20px;
+  justify-content: space-between;
 }
 
-.notify-row input {
-  min-width: 0;
-  min-height: 58px;
-  border: 0;
-  padding: 0 0 0 22px;
-  border-radius: 999px;
-  background: transparent;
-  color: var(--ink);
-  font: inherit;
-  font-size: 16px;
-  font-weight: 750;
-  outline: none;
-}
-
-.notify-row input::placeholder {
-  color: var(--muted);
-}
-
-.notify-row input:focus-visible {
-  box-shadow: inset 0 0 0 2px var(--bronze);
-}
-
-.notify-row button {
-  min-height: 58px;
-  border: 0;
-  border-radius: 999px;
-  padding: 0 22px;
-  background: var(--ink);
-  color: var(--vellum);
-  font-size: 15px;
-  font-weight: 900;
-  cursor: pointer;
-  transition: transform 650ms var(--ease-heavy), background-color 650ms var(--ease-heavy);
-}
-
-.notify-row button:hover {
-  transform: translateY(-1px);
-  background: var(--bronze);
-}
-
-.notify-row button:disabled {
-  cursor: wait;
-  opacity: 0.72;
-}
-
-.notify-note {
-  margin: 14px 22px 18px;
+.download-cta-note {
+  margin-top: 16px;
   color: var(--muted);
   font-size: 14px;
   font-weight: 750;
@@ -969,7 +919,7 @@ h1 {
     grid-template-columns: 1fr;
   }
 
-  .notify-form {
+  .download-cta {
     justify-self: start;
   }
 
@@ -1103,23 +1053,10 @@ h1 {
     margin-top: 72px;
   }
 
-  .notify-form {
+  .download-cta {
     width: 100%;
     border-radius: 26px;
-  }
-
-  .notify-row {
-    grid-template-columns: 1fr;
-    border-radius: 22px;
-    padding: 8px;
-  }
-
-  .notify-row input {
-    padding-inline: 16px;
-  }
-
-  .notify-row button {
-    width: 100%;
+    padding: 24px;
   }
 
   .mini-card,
