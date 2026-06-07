@@ -143,3 +143,19 @@ test("landing page stays compatible with GitHub Pages static hosting", async () 
   assert.doesNotMatch(script, /buttondown/);
   assert.doesNotMatch(packageJson, /server\.js/);
 });
+
+test("landing page loads Google Tag Manager and tracks Play Store clicks", async () => {
+  const html = await read("index.html");
+  const script = await read("script.js");
+
+  assert.match(html, /GTM-PX8TBRMH/);
+  assert.match(html, /googletagmanager\.com\/gtm\.js/);
+  assert.match(html, /googletagmanager\.com\/ns\.html\?id=GTM-PX8TBRMH/);
+  assert.match(html, /class="nav-action js-play-store-link"/);
+  assert.match(html, /class="cta primary download-cta-button js-play-store-link"/);
+  assert.match(html, /data-analytics-location="nav"/);
+  assert.match(html, /data-analytics-location="closing_cta"/);
+  assert.match(script, /event:\s*"play_store_click"/);
+  assert.match(script, /click_location:\s*location/);
+  assert.match(script, /\.js-play-store-link/);
+});
